@@ -32,6 +32,16 @@ public class User implements UserResource, Serializable {
 
 	@Column(name = "status")
 	private String status;
+	
+	public User() {}
+
+	public User(Long id, String username, String password, String status) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.status = status;
+	}
 
 	public Long getId() {
 		return id;

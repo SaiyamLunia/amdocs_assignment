@@ -39,7 +39,7 @@ public class UserController {
 	
 	@PutMapping("/user/{username}")
 	@JsonView(UserResource.UserView.class)
-	public ResponseEntity<Object> createUser(@PathVariable String username, @RequestBody User user) {
+	public ResponseEntity<Object> editUser(@PathVariable String username, @RequestBody User user) {
 		return new ResponseEntity<>(userService.editUser(username, user), HttpStatus.OK);
 	}
 	
