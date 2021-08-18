@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public User addUser(User user) {
 		LOGGER.info("Inside method: UserServiceImpl.addUser");
 		Optional<User> userOpt = userDao.findByUserName(user.getUsername());
@@ -36,6 +38,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public User getUser(String username) {
 		LOGGER.info("Inside method: UserServiceImpl.getUser");
 		Optional<User> user = userDao.findByUserName(username);
@@ -50,6 +53,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public User editUser(String username, User user) {
 		LOGGER.info("Inside method: UserServiceImpl.editUser");
 		Optional<User> userOpt = userDao.findByUserName(user.getUsername());
@@ -69,6 +73,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteUser(String username) {
 		LOGGER.info("Inside method: UserServiceImpl.deleteUser");
 		Optional<User> user = userDao.findByUserName(username);
