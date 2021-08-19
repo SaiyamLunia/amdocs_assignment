@@ -10,11 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "User", uniqueConstraints = {
 	    @UniqueConstraint(name = "id", columnNames = "id"),
 	    @UniqueConstraint(name = "username", columnNames = "username")
 	})
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User implements UserResource, Serializable {
 
 	private static final long serialVersionUID = 1L;
